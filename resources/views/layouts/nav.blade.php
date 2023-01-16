@@ -1,0 +1,9 @@
+<html>
+<head>
+    <title>@yield('title')</title>
+</head>
+<body>
+@include('profile.partials.nav')
+@yield('content')
+</body>
+</html>
