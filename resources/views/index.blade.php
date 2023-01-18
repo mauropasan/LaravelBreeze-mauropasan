@@ -1,5 +1,5 @@
 @extends('layouts/nav')
-@section('title', 'Chollometro')
+@section('title', 'Ganga ░▒▓ Severa')
 @section('content')
-    <h1>Benvingut a Chollometro!</h1>
+    <h1>Benvingut a Ganga ░▒▓ Severa!</h1>
 @endsection

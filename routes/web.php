@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GangaController;
+use \App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,13 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [GangaController::class, 'index'])->name('ganga.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,4 +24,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/profile/{username}', [ProfileController::class, 'show'])->middleware('checkGangaOwnership')->name('profile.show');
+
+Route::resource('gangues', GangaController::class)->only(['index', 'show', 'create', 'edit', 'destroy']);
+
+Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
 require __DIR__.'/auth.php';

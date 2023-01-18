@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id()->autoIncrement()->unique();
             $table->string('title');
             $table->string('description');
-            $table->string('url');
+            $table->string('img_url');
             $table->bigInteger('category_id');
             $table->integer('likes');
             $table->integer('unlikes');
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->bigInteger('user_id');
 
             $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
         });

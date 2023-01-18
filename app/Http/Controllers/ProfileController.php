@@ -3,12 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Ganga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class ProfileController extends Controller
 {
+    public function show(Request $request, $username) {
+        $gangues = Ganga::leftJoin('users', 'ganga.user_id', '=', 'users.id')->where('users.id', $request->user()->id)->get();
+        if ($request->user()->username === null) {
+            return view('login');
+        }
+        return view('profile.show', compact('gangues', 'username'));
+    }
     /**
      * Display the user's profile form.
      *

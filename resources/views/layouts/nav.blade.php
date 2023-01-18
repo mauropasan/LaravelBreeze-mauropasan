@@ -5,5 +5,6 @@
 <body>
 @include('profile.partials.nav')
 @yield('content')
+@include('profile.partials.footer')
 </body>
 </html>
