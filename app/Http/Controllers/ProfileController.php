@@ -11,10 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 class ProfileController extends Controller
 {
     public function show(Request $request, $username) {
-        $gangues = Ganga::leftJoin('users', 'ganga.user_id', '=', 'users.id')->where('users.id', $request->user()->id)->get();
-        if ($request->user()->username === null) {
-            return view('login');
-        }
+        $gangues = Ganga::where('user_id', $request->user()->id)->paginate(6);
         return view('profile.show', compact('gangues', 'username'));
     }
     /**

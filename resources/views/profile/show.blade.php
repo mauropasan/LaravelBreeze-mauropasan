@@ -1,16 +1,6 @@
-@extends('layouts.nav')
+@extends('layouts.base')
 @section('title', 'Ganga ░▒▓ Severa')
 @section('content')
-    <h1 class="text-red">Les gangues de {{ $username }}</h1>
-    <h2>Gangues</h2>
-    @foreach($gangues ?? [] as $ganga)
-        <div>
-            <img src="{{ $ganga->img_url }}" alt="{{ $ganga->img_url }}">
-            <p>{{ $ganga->category_id }}</p>
-            <p>{{ $ganga->likes }}</p>
-            <p>{{ $ganga->unlikes }}</p>
-            <p>{{ $ganga->price_sale }} €</p>
-            <p>{{ $ganga->available ? "En Stock" : "Fuera de Stock" }}</p>
-        </div>
-    @endforeach
+    @section('h1', 'Les gangues de ' . $username)
+    @include('layouts.gangues')
 @endsection

@@ -14,7 +14,7 @@ class GangaController extends Controller
      */
     public function index()
     {
-        $gangues = Ganga::orderBy('created_at', 'asc')->paginate(5);
+        $gangues = Ganga::orderBy('created_at', 'asc')->paginate(6);
         return view('ganga.index', compact('gangues'));
     }
 
@@ -25,7 +25,7 @@ class GangaController extends Controller
      */
     public function create()
     {
-        //
+        return view('ganga.create');
     }
 
     /**
@@ -45,9 +45,10 @@ class GangaController extends Controller
      * @param  \App\Models\Ganga  $ganga
      * @return \Illuminate\Http\Response
      */
-    public function show(Ganga $ganga)
+    public function show($id)
     {
-        //
+        $ganga = Ganga::find($id);
+        return view('ganga.show', compact('ganga'));
     }
 
     /**
@@ -56,9 +57,10 @@ class GangaController extends Controller
      * @param  \App\Models\Ganga  $ganga
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ganga $ganga)
+    public function edit($id)
     {
-        //
+        $ganga = Ganga::find($id);
+        return view('ganga.edit', compact('ganga'));
     }
 
     /**
@@ -68,9 +70,11 @@ class GangaController extends Controller
      * @param  \App\Models\Ganga  $ganga
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ganga $ganga)
+    public function update(Request $request, $id)
     {
-        //
+        $ganga = Ganga::find($id);
+        $ganga->update($request->all());
+        return view('ganga.show', compact('ganga'))->with('success', "S'ha actualitzat la ganga correctament");
     }
 
     /**
@@ -79,8 +83,10 @@ class GangaController extends Controller
      * @param  \App\Models\Ganga  $ganga
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ganga $ganga)
+    public function destroy($id)
     {
-        //
+        $ganga = Ganga::find($id);
+        $ganga->delete();
+        return redirect('/')->with('success', "S'ha eliminat la ganga ".$ganga->name." correctament.");
     }
 }

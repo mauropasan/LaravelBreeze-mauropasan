@@ -2,11 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Ganga;
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckGangaOwnerShip
+class CheckProfile
 {
     /**
      * Handle an incoming request.
@@ -18,17 +18,15 @@ class CheckGangaOwnerShip
     public function handle(Request $request, Closure $next)
     {
         if (!auth()->check()) {
-            abort(403);
+            return response()->make('Unauthorized', 403);
         }
 
-        $ganga = Ganga::findOrFail($request->route('id'));
+        $user = User::where('username', $request->route('username'))->first();
 
-        if ($ganga->user_id !== auth()->user()->id) {
+        if (!$user || $user->username !== auth()->user()->username) {
             abort(403);
         }
 
         return $next($request);
     }
-
-
 }
