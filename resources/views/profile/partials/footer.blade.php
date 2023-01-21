@@ -1,1 +1,1 @@
-<footer class="p-3 fixed-bottom bg-dark-subtle">Mauro Pastor Anduix &#169; {{ \Carbon\Carbon::now()->year }} Chollometro</footer>
+<footer class="p-3 fixed-bottom text-center bg-dark-subtle">Mauro Pastor Anduix &#169;*{{ \Carbon\Carbon::now()->year }} Ganga Severa</footer>

@@ -4,13 +4,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
 </head>
 <body class="container-fluid p-0 mb-5 m-0">
 @include('layouts.nav')
 <h1 class="text-center">@yield('h1')</h1>
-@if('success')
-
-@endif
 @yield('content')
 @include('profile.partials.footer')
 </body>

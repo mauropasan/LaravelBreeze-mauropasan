@@ -2,14 +2,15 @@
 @section('title', 'Ganga ░▒▓ Severa')
 @section('content')
     @section('h1', $ganga->title)
-    <div class="row justify-content-center">
-        <div class="row col-10 p-0 justify-content-center bg-info-subtle">
+    <div class="row justify-content-center m-0">
+        <div class="row col-8 p-0 justify-content-center bg-info-subtle">
             <div class="col-6 p-0">
-                <img class="w-100 text-center p-5" src="{{'/storage/'.$ganga->img_url }}" alt="{{ $ganga->title }}">
+                <img class="w-100 text-center p-5" src="{{$ganga->img_url }}" alt="{{ $ganga->title }}">
             </div>
             <div class="col-6 pt-5">
                 <div class="col-6">
                     <p><strong>Categoría:</strong> {{ $ganga->category->name }}</p>
+                    <p><strong>Preu:</strong> {{ $ganga->price }} €</p>
                     <p><strong>Preu (rebaixat):</strong> {{ $ganga->price_sale }} €</p>
                     <p><strong>Disponibilitat:</strong> {{ $ganga->available ? "Amb Stock" : "Sense Stock" }}</p>
                     <p><strong>M'agrada:</strong> {{ $ganga->likes }}</p>
