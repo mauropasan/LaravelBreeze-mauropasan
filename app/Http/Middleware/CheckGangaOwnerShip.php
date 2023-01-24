@@ -18,12 +18,21 @@ class CheckGangaOwnerShip
     public function handle(Request $request, Closure $next)
     {
         if (!auth()->check()) {
+
+            if (request()->is('api*'))
+            {
+                return response()->json(['error' => 'No hi ha cap sessió iniciada'], 403);
+            }
             abort(403);
         }
 
         $ganga = Ganga::findOrFail($request->route('id'));
 
         if ($ganga->user_id !== auth()->user()->id) {
+            if (request()->is('api*'))
+            {
+                return response()->json(['error' => 'No tens permís per a fer aquesta acció'], 403);
+            }
             abort(403);
         }
 

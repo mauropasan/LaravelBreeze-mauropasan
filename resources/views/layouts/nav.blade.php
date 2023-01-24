@@ -18,8 +18,8 @@
         </ul>
     @else
         <ul class="navbar m-0 float-end list-unstyled col-2 row text-end">
-            <a class="nav-item mx-3"href="{{ route('login') }}">Iniciar sessió</a>
-            <a class="nav-item mx-3" href="{{ route('register') }}">Registrar-se</a>
+            <a class="nav-item"href="{{ route('login') }}">Iniciar sessió</a>
+            <a class="nav-item" href="{{ route('register') }}">Registrar-se</a>
         </ul>
     @endif
 </nav>

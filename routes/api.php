@@ -17,3 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('login', [\App\Http\Controllers\Api\LoginController::class,'login']);
+
+Route::post('ganga', [\App\Http\Controllers\Api\GangaController::class, 'store'])->middleware('auth:sanctum');
+
+Route::middleware(['auth:sanctum', 'CheckGangaOwnership'])->group(function () {
+    Route::put('ganga/{id}', [\App\Http\Controllers\Api\GangaController::class, 'update']);
+    Route::delete('ganga/{id}', [\App\Http\Controllers\Api\GangaController::class, 'destroy']);
+});
+
+Route::apiResource('ganga', \App\Http\Controllers\Api\GangaController::class)->only(['index', 'show']);
