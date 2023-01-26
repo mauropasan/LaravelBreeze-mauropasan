@@ -42,7 +42,5 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/profile/{username}', [ProfileController::class, 'show'])->middleware('CheckProfile')->name('profile.show');
 
-Route::resource('gangues', GangaController::class)->only(['index', 'show', 'create', 'store', 'edit', 'destroy']);
-
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
 require __DIR__.'/auth.php';

@@ -7,6 +7,146 @@ use App\Http\Resources\GangaResource;
 use App\Models\Ganga;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Get(
+ * path="/ganga",
+ * summary="Get all gangues",
+ * description="Get all gangues from database",
+ * operationId="ganga@index",
+ * tags={"gangues"},
+ * @OA\Response(
+ *    response=200,
+ *    description="All gangues are recieved",
+ * ),
+ * )
+ *
+ * @OA\Get(
+ * path="/ganga/{id}",
+ * summary="Get a specified ganga",
+ * description="Get a specified ganga from an id as parameter",
+ * operationId="ganga@show",
+ * tags={"gangues"},
+ * @OA\Parameter(
+ *     name="id",
+ *     in="path",
+ *     required=true,
+ *     description="Ganga id to retrieve",
+ *     @OA\Schema(
+ *         type="integer",
+ *     )
+ * ),
+ * @OA\Response(
+ *    response=200,
+ *    description="Ganga with id is retrieved succesfully",
+ * ),
+ * @OA\Response(
+ *    response=404,
+ *    description="Ganga with id was not found",
+ * ),
+ * )
+ *
+ * @OA\Post(
+ * path="/ganga",
+ * summary="Post a new ganga",
+ * description="Create a new ganga and save it to the database",
+ * operationId="ganga@create",
+ * tags={"gangues"},
+ * @OA\RequestBody(
+ *    required=true,
+ *    description="Send ganga data",
+ *    @OA\JsonContent(
+ *       required={"title","description","category_id","price","price_sale"},
+ *       @OA\Property(property="title", type="string", example="A ganga title sample"),
+ *       @OA\Property(property="description", type="string", example="A full ganga description sample"),
+ *       @OA\Property(property="img_url", type="string", example="img/path.jpg"),
+ *       @OA\Property(property="category_id", type="integer", example="1"),
+ *       @OA\Property(property="price", type="double", example="30.50"),
+ *       @OA\Property(property="price_sale", type="double", example="10.50"),
+ *       @OA\Property(property="available", type="boolean", example="1"),
+ *    ),
+ * ),
+ * @OA\Response(
+ *    response=200,
+ *    description="Ganga was saved to the database succesfully",
+ * ),
+ * @OA\Response(
+ *    response=403,
+ *    description="You don't have permissions to perform the action (No login)",
+ * ),
+ * )
+ *
+ * @OA\Put(
+ * path="/ganga/{id}",
+ * summary="Update a specified ganga",
+ * description="Update the current specified ganga in the database",
+ * operationId="ganga@update",
+ * tags={"gangues"},
+ * @OA\Parameter(
+ *     name="id",
+ *     in="path",
+ *     required=true,
+ *     description="Ganga id to update",
+ *     @OA\Schema(
+ *         type="integer",
+ *     )
+ * ),
+ * @OA\RequestBody(
+ *    required=true,
+ *    description="Send ganga data",
+ *    @OA\JsonContent(
+ *       required={"title","description","category_id","price","price_sale"},
+ *       @OA\Property(property="title", type="string", example="A ganga title sample"),
+ *       @OA\Property(property="description", type="string", example="A full ganga description sample"),
+ *       @OA\Property(property="img_url", type="string", example="img/path.jpg"),
+ *       @OA\Property(property="category_id", type="integer", example="1"),
+ *       @OA\Property(property="price", type="double", example="30.50"),
+ *       @OA\Property(property="price_sale", type="double", example="10.50"),
+ *       @OA\Property(property="available", type="boolean", example="1"),
+ *    ),
+ * ),
+ * @OA\Response(
+ *    response=200,
+ *    description="Ganga was updated to the database succesfully",
+ * ),
+ * @OA\Response(
+ *    response=403,
+ *    description="You don't have permissions to perform the action (No login or no ownership over the ganga)",
+ * ),
+ * @OA\Response(
+ *    response=404,
+ *    description="Ganga with id was not found",
+ * ),
+ * )
+ *
+ * @OA\Delete(
+ * path="/ganga/{id}",
+ * summary="Delete a specified ganga",
+ * description="Delete a specified ganga from the database",
+ * operationId="ganga@destroy",
+ * tags={"gangues"},
+ * @OA\Parameter(
+ *     name="id",
+ *     in="path",
+ *     required=true,
+ *     description="Ganga id to delete",
+ *     @OA\Schema(
+ *         type="integer",
+ *     )
+ * ),
+ * @OA\Response(
+ *    response=200,
+ *    description="Ganga was deleted from the database succesfully",
+ * ),
+ * @OA\Response(
+ *    response=403,
+ *    description="You don't have permissions to perform the action (No login or no ownership over the ganga)",
+ * ),
+ * @OA\Response(
+ *    response=404,
+ *    description="Ganga with id was not found",
+ * ),
+ * )
+ */
 class GangaController extends Controller
 {
     /**
@@ -31,8 +171,8 @@ class GangaController extends Controller
         $ganga->title = $request->title;
         $ganga->description = $request->description;
         $ganga->img_url = $request->img_url;
-        $ganga->likes = $request->likes;
-        $ganga->unlikes = $request->unlikes;
+        $ganga->likes = 0;
+        $ganga->unlikes = 0;
         $ganga->category_id = $request->category_id;
         $ganga->price = $request->price;
         $ganga->price_sale = $request->price_sale;

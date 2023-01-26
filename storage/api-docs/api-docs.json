@@ -1,0 +1,288 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Ganga ApplicationAPI",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/ganga": {
+            "get": {
+                "tags": [
+                    "gangues"
+                ],
+                "summary": "Get all gangues",
+                "description": "Get all gangues from database",
+                "operationId": "ganga@index",
+                "responses": {
+                    "200": {
+                        "description": "All gangues are recieved"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "gangues"
+                ],
+                "summary": "Post a new ganga",
+                "description": "Create a new ganga and save it to the database",
+                "operationId": "ganga@create",
+                "requestBody": {
+                    "description": "Send ganga data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "category_id",
+                                    "price",
+                                    "price_sale"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "A ganga title sample"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "A full ganga description sample"
+                                    },
+                                    "img_url": {
+                                        "type": "string",
+                                        "example": "img/path.jpg"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": "30.50"
+                                    },
+                                    "price_sale": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": "10.50"
+                                    },
+                                    "available": {
+                                        "type": "boolean",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ganga was saved to the database succesfully"
+                    },
+                    "403": {
+                        "description": "You don't have permissions to perform the action (No login)"
+                    }
+                }
+            }
+        },
+        "/ganga/{id}": {
+            "get": {
+                "tags": [
+                    "gangues"
+                ],
+                "summary": "Get a specified ganga",
+                "description": "Get a specified ganga from an id as parameter",
+                "operationId": "ganga@show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Ganga id to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ganga with id is retrieved succesfully"
+                    },
+                    "404": {
+                        "description": "Ganga with id was not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "gangues"
+                ],
+                "summary": "Update a specified ganga",
+                "description": "Update the current specified ganga in the database",
+                "operationId": "ganga@update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Ganga id to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Send ganga data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "category_id",
+                                    "price",
+                                    "price_sale"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "A ganga title sample"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "A full ganga description sample"
+                                    },
+                                    "img_url": {
+                                        "type": "string",
+                                        "example": "img/path.jpg"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": "30.50"
+                                    },
+                                    "price_sale": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": "10.50"
+                                    },
+                                    "available": {
+                                        "type": "boolean",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ganga was updated to the database succesfully"
+                    },
+                    "403": {
+                        "description": "You don't have permissions to perform the action (No login or no ownership over the ganga)"
+                    },
+                    "404": {
+                        "description": "Ganga with id was not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "gangues"
+                ],
+                "summary": "Delete a specified ganga",
+                "description": "Delete a specified ganga from the database",
+                "operationId": "ganga@destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Ganga id to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ganga was deleted from the database succesfully"
+                    },
+                    "403": {
+                        "description": "You don't have permissions to perform the action (No login or no ownership over the ganga)"
+                    },
+                    "404": {
+                        "description": "Ganga with id was not found"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Sign in",
+                "description": "Login by email, password",
+                "operationId": "authLogin",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    },
+                                    "persistent": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, wrong email address or password. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
