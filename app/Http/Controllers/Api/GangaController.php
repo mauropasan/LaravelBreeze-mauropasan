@@ -137,7 +137,7 @@ use Illuminate\Http\Request;
  *     )
  * ),
  * @OA\Response(
- *    response=201,
+ *    response=200,
  *    description="Ganga was deleted from the database succesfully",
  * ),
  * @OA\Response(
@@ -182,7 +182,7 @@ class GangaController extends Controller
         $ganga->available = $request->available;
         $ganga->user_id = auth()->user()->id;
         $ganga->save();
-        return response()->json($ganga, '201');
+        return response()->json($ganga, '200');
     }
 
     /**

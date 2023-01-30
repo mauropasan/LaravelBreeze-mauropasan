@@ -124,7 +124,7 @@ class GangaController extends Controller
 
         $ganga = Ganga::find($id);
         $available = $request->has('available') ? 1 : 0;
-        $ganga->update([$request->title, $request->description, $request->img_url, $request->category_id, $request->price, $request->price_sale, $available]);
+        $ganga->fill($request->toArray());
         $ganga->save();
         return view('ganga.show', compact('ganga'))->with('success', "S'ha actualitzat la ganga correctament");
     }
