@@ -9,7 +9,7 @@ use App\Models\User;
 
 /**
  * @OA\Post(
- * path="/login",
+ * path="/api/login",
  * summary="Sign in",
  * description="Login by email, password",
  * operationId="authLogin",
@@ -19,9 +19,8 @@ use App\Models\User;
  *    description="Pass user credentials",
  *    @OA\JsonContent(
  *       required={"email","password"},
- *       @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
- *       @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
- *       @OA\Property(property="persistent", type="boolean", example="true"),
+ *       @OA\Property(property="email", type="string", format="email", example="a@a.com"),
+ *       @OA\Property(property="password", type="string", format="password", example="12345678"),
  *    ),
  * ),
  * @OA\Response(

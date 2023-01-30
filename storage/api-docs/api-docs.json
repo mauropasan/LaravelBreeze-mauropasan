@@ -5,7 +5,7 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/ganga": {
+        "/api/ganga": {
             "get": {
                 "tags": [
                     "gangues"
@@ -83,10 +83,15 @@
                     "403": {
                         "description": "You don't have permissions to perform the action (No login)"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
             }
         },
-        "/ganga/{id}": {
+        "/api/ganga/{id}": {
             "get": {
                 "tags": [
                     "gangues"
@@ -192,7 +197,12 @@
                     "404": {
                         "description": "Ganga with id was not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -222,10 +232,15 @@
                     "404": {
                         "description": "Ganga with id was not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
             }
         },
-        "/login": {
+        "/api/login": {
             "post": {
                 "tags": [
                     "auth"
@@ -247,16 +262,12 @@
                                     "email": {
                                         "type": "string",
                                         "format": "email",
-                                        "example": "user1@mail.com"
+                                        "example": "a@a.com"
                                     },
                                     "password": {
                                         "type": "string",
                                         "format": "password",
-                                        "example": "PassWord12345"
-                                    },
-                                    "persistent": {
-                                        "type": "boolean",
-                                        "example": "true"
+                                        "example": "12345678"
                                     }
                                 },
                                 "type": "object"
@@ -282,6 +293,18 @@
                         }
                     }
                 }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "apiAuth": {
+                "type": "http",
+                "description": "Login with email and password to get the authentication token",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     }

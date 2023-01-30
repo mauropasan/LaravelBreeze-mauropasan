@@ -19,9 +19,11 @@ class GangaResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
+            'category' => optional($this->category)->name,
             'price' => $this->price,
             'price_sale' => $this->price_sale,
-            'available' => $this->available,
+            'available' => (bool)$this->available,
+            'user' => optional($this->user)->username,
         ];
     }
 }

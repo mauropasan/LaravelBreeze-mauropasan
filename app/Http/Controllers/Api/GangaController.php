@@ -9,19 +9,19 @@ use Illuminate\Http\Request;
 
 /**
  * @OA\Get(
- * path="/ganga",
+ * path="/api/ganga",
  * summary="Get all gangues",
  * description="Get all gangues from database",
  * operationId="ganga@index",
  * tags={"gangues"},
  * @OA\Response(
- *    response=200,
+ *    response=201,
  *    description="All gangues are recieved",
  * ),
  * )
  *
  * @OA\Get(
- * path="/ganga/{id}",
+ * path="/api/ganga/{id}",
  * summary="Get a specified ganga",
  * description="Get a specified ganga from an id as parameter",
  * operationId="ganga@show",
@@ -36,7 +36,7 @@ use Illuminate\Http\Request;
  *     )
  * ),
  * @OA\Response(
- *    response=200,
+ *    response=201,
  *    description="Ganga with id is retrieved succesfully",
  * ),
  * @OA\Response(
@@ -46,11 +46,12 @@ use Illuminate\Http\Request;
  * )
  *
  * @OA\Post(
- * path="/ganga",
+ * path="/api/ganga",
  * summary="Post a new ganga",
  * description="Create a new ganga and save it to the database",
  * operationId="ganga@create",
  * tags={"gangues"},
+ * security={ {"apiAuth": {} }},
  * @OA\RequestBody(
  *    required=true,
  *    description="Send ganga data",
@@ -66,7 +67,7 @@ use Illuminate\Http\Request;
  *    ),
  * ),
  * @OA\Response(
- *    response=200,
+ *    response=201,
  *    description="Ganga was saved to the database succesfully",
  * ),
  * @OA\Response(
@@ -76,10 +77,11 @@ use Illuminate\Http\Request;
  * )
  *
  * @OA\Put(
- * path="/ganga/{id}",
+ * path="/api/ganga/{id}",
  * summary="Update a specified ganga",
  * description="Update the current specified ganga in the database",
  * operationId="ganga@update",
+ * security={ {"apiAuth": {} }},
  * tags={"gangues"},
  * @OA\Parameter(
  *     name="id",
@@ -105,7 +107,7 @@ use Illuminate\Http\Request;
  *    ),
  * ),
  * @OA\Response(
- *    response=200,
+ *    response=201,
  *    description="Ganga was updated to the database succesfully",
  * ),
  * @OA\Response(
@@ -119,11 +121,12 @@ use Illuminate\Http\Request;
  * )
  *
  * @OA\Delete(
- * path="/ganga/{id}",
+ * path="/api/ganga/{id}",
  * summary="Delete a specified ganga",
  * description="Delete a specified ganga from the database",
  * operationId="ganga@destroy",
  * tags={"gangues"},
+ * security={ {"apiAuth": {} }},
  * @OA\Parameter(
  *     name="id",
  *     in="path",
@@ -134,7 +137,7 @@ use Illuminate\Http\Request;
  *     )
  * ),
  * @OA\Response(
- *    response=200,
+ *    response=201,
  *    description="Ganga was deleted from the database succesfully",
  * ),
  * @OA\Response(
@@ -221,9 +224,10 @@ class GangaController extends Controller
      * @param  \App\Models\Ganga  $ganga
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ganga $ganga)
+    public function destroy($ganga)
     {
+        $ganga = Ganga::find($ganga);
         $ganga->delete();
-        return response()->json(null, '204');
+        return response()->json([ 'success' => 'Se ha eliminado la ganga correctamente'],'200');
     }
 }
